@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-
+#include <memory>
 #include <random>
 #include "SDL.h"
 #include "controller.h"
@@ -13,10 +13,11 @@ class Game {
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
   int GetScore() const;
-  int GetSize() const;
+  //int GetSize() const;
 
  private:
-  Snake snake;
+  std::vector<std::shared_ptr<Snake>> _snakes;
+
   SDL_Point food;
 
   std::random_device dev;

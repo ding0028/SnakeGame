@@ -52,18 +52,19 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
     body.erase(body.begin());
   } else {
     growing = false;
-    size++;
+    size += growthRate;
   }
 
   // Check if the snake has died.
   for (auto const &item : body) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
       alive = false;
+      std::cout << "Game over \n";
     }
   }
 }
 
-void Snake::GrowBody() { growing = true; }
+void Snake::GrowBody() { growing = true; speed += speedRate; }
 
 // Inefficient method to check if cell is occupied by snake.
 bool Snake::SnakeCell(int x, int y) {
