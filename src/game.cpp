@@ -31,18 +31,20 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         controller.HandleInput(running, _snakes[0]);
         Update();
 
-        //update direction of robot in the direction of food 
+        //update direction of robot wrt to player / food 
         float posXrelative = _snakes[1]->head_x - food.x;
         float posYrelative = _snakes[1]->head_y - food.y;
-        if (posYrelative > posXrelative) {
+        float posXrelativeP = _snakes[1]->head_x - _snakes[0]->head_x;
+        float posYrelativeP = _snakes[1]->head_y - _snakes[0]->head_y;
+        if (posYrelative > posYrelativeP) {
             controller.ChangeDirection(_snakes[1], Snake::Direction::kUp,
                 Snake::Direction::kDown);
         }
         else {
             controller.ChangeDirection(_snakes[1], Snake::Direction::kRight,
                 Snake::Direction::kLeft);
-        }        
-        
+        }
+
         renderer.Render(_snakes, food);
 
         frame_end = SDL_GetTicks();
@@ -79,10 +81,10 @@ void Game::PlaceFood() {
         y = random_h(engine);
         // Check that the location is not occupied by a snake item before placing
         // food.
-        if (!_snakes[0]->SnakeCell(x, y)) {
+        if (!_snakes[0]->SnakeCell(x, y) && !_snakes[1]->SnakeCell(x, y)) {
             food.x = x;
             food.y = y;
-            std::cout << "Food placed " << std::endl;
+            std::cout << "Food placed " <<x<<" "<<y<<std::endl;
             break;
         }
 
@@ -111,18 +113,20 @@ void Game::Update() {
         case 3: _snakes[0]->ShrinkBody(1); break;
         default: break;
         }
-        
+
         _snakes[0]->GrowBody();
         _snakes[1]->GrowBody();
         PlaceFood();
     }
 
     for (auto const &robot : _snakes[1]->body){
-        // Check if any contact with robot
-        if (robot.x == new_x && robot.y == new_y){
-            _snakes[0]->vSetAlive(false);
-            std::cout << "Game over  " << std::endl;
-            return;
+        for (auto const &player : _snakes[0]->body){
+            // Check if any contact with robot
+            if (robot.x == player.x && robot.y == player.y){
+                _snakes[0]->vSetAlive(false);
+                std::cout << "Game over  " << std::endl;
+                return;
+            }
         }
     }
 

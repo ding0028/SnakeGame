@@ -29,7 +29,7 @@ class Snake {
         speedRate(speedRate),
         growing(false),
         alive(true),
-        shrinking(true),
+        shrinking(false),
         direction(Direction::kUp)  
        {        
            body.clear();  
@@ -45,6 +45,7 @@ class Snake {
   float getSize() const { return size; }  
   void vChangeDirection(const Direction d) { direction = d; }
   Direction getDirection() const { return direction; }
+  bool boShrinking() const { return shrinking; }
 
   //virtual function
   virtual SnakeType getType() const { return Snake::robot; }
@@ -67,8 +68,8 @@ class Snake {
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 
   //private variables
-  bool growing{false};
-  bool alive{ true };
+  bool growing;
+  bool alive;
   bool shrinking;
   int grid_width;
   int grid_height;  

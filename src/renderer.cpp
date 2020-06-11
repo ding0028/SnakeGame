@@ -61,9 +61,11 @@ void Renderer::Render(const std::vector<std::shared_ptr<Snake>> &snakes, Food co
   SDL_RenderFillRect(sdl_renderer, &block);
 
   for (auto const snake : snakes) {
+      //change the color if body shrink or speed reduces
+      int color = snake->boShrinking() ? 0xFF : 0x00;
       // Render snake's body
       if (snake->getType() == Snake::robot)
-          SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xF0);
+          SDL_SetRenderDrawColor(sdl_renderer, 0xFF, color, 0x00, 0xF0);
       else
           SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
       for (SDL_Point const &point : snake->body) {

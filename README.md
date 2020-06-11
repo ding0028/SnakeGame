@@ -9,6 +9,18 @@ Additional features:
 - It will compete with the player for food but not consuming the food, i.e. stay nearby the food
 - Special food (blue) to reduce the speed of robot snake, green food to reduce the length of robot snake by half 
 
+# Rubic:
+The project uses Object Oriented Programming techniques. 
+Classes use appropriate access specifiers for class members.
+Class constructors utilize member initialization lists.
+Classes abstract implementation details from their interfaces.
+Classes encapsulate behavior.
+Overloaded functions allow the same function to operate on different parameters.
+Derived class functions override virtual base class functions.
+
+The project makes use of references in function declarations.
+The project uses smart pointers instead of raw pointers
+
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
