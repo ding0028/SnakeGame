@@ -7,18 +7,22 @@
 #include "renderer.h"
 #include "snake.h"
 
+
 class Game {
  public:
+  // constructor / desctructor
   Game(std::size_t grid_width, std::size_t grid_height);
+  // typical behaviour methods
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
+  // miscellaneous
   int GetScore() const;
-  //int GetSize() const;
+
 
  private:
-  std::vector<std::shared_ptr<Snake>> _snakes;
 
-  SDL_Point food;
+  std::vector<std::shared_ptr<Snake>> _snakes;
+  Food food;
 
   std::random_device dev;
   std::mt19937 engine;

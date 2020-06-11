@@ -4,9 +4,11 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 
 <img src="snake_game.gif"/>
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
+Additional features:
+- A robot snake (obstacle) that grows in length and speed at reduced rate of player's snake 
+- It will compete with the player for food but not consuming the food, i.e. stay nearby the food
+- Special food (blue) to reduce the speed of robot snake, green food to reduce the length of robot snake by half 
 
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7

@@ -30,7 +30,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, _snakes[0]);
         Update();
-        //update direction of robot in the direction of food   
+
+        //update direction of robot in the direction of food 
         float posXrelative = _snakes[1]->head_x - food.x;
         float posYrelative = _snakes[1]->head_y - food.y;
         if (posYrelative > posXrelative) {
@@ -40,8 +41,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         else {
             controller.ChangeDirection(_snakes[1], Snake::Direction::kRight,
                 Snake::Direction::kLeft);
-        }
-
+        }        
+        
         renderer.Render(_snakes, food);
 
         frame_end = SDL_GetTicks();
@@ -69,16 +70,19 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 void Game::PlaceFood() {
     int x, y;
+    //generate random food type when score is 3 and above
+    if (GetScore() >= 3)
+        food.type = rand() % 3;
+
     while (true) {
         x = random_w(engine);
         y = random_h(engine);
         // Check that the location is not occupied by a snake item before placing
         // food.
-
         if (!_snakes[0]->SnakeCell(x, y)) {
             food.x = x;
             food.y = y;
-            std::cout << "Food placed \n";
+            std::cout << "Food placed " << std::endl;
             break;
         }
 
@@ -98,8 +102,16 @@ void Game::Update() {
     // Check if there's food over here
     if (food.x == new_x && food.y == new_y) {
         score++;
-        std::cout << "Food consumed \n";
-        // Grow snake and increase speed.
+        std::cout << "Food consumed  " << std::endl;
+
+        // Grow snake and adjust speed according to food type
+        switch (food.type){
+        case 1: _snakes[1]->vSetSize(_snakes[1]->getSize() / 2); _snakes[1]->ShrinkBody();  break; // green: reduce the size of robot
+        case 2: _snakes[1]->vSetSpeed(_snakes[1]->getSpeed() / 2); break; //blue: reduce the speed of the robot
+        case 3: _snakes[0]->ShrinkBody(1); break;
+        default: break;
+        }
+        
         _snakes[0]->GrowBody();
         _snakes[1]->GrowBody();
         PlaceFood();
@@ -109,7 +121,7 @@ void Game::Update() {
         // Check if any contact with robot
         if (robot.x == new_x && robot.y == new_y){
             _snakes[0]->vSetAlive(false);
-            std::cout << "Game over \n";
+            std::cout << "Game over  " << std::endl;
             return;
         }
     }

@@ -38,7 +38,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(const std::vector<std::shared_ptr<Snake>> &snakes, SDL_Point const &food) {
+void Renderer::Render(const std::vector<std::shared_ptr<Snake>> &snakes, Food const &food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -48,7 +48,14 @@ void Renderer::Render(const std::vector<std::shared_ptr<Snake>> &snakes, SDL_Poi
   SDL_RenderClear(sdl_renderer);
 
   // Render food
-  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
+  switch (food.type){
+  case 1:SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF); break;
+  case 2:SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00, 0xFF, 0xFF); break;
+  case 3:SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0xFF, 0xFF); break;
+    default:
+        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF); break;
+  }
+  
   block.x = food.x * block.w;
   block.y = food.y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
@@ -74,7 +81,7 @@ void Renderer::Render(const std::vector<std::shared_ptr<Snake>> &snakes, SDL_Poi
               SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
           }
           else {
-              SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
+              SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xA0);
           }          
       }
 
