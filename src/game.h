@@ -22,8 +22,8 @@ class Game {
  private:
 
   std::vector<std::shared_ptr<Snake>> _snakes;
-  Food food;
-
+  std::vector<std::shared_ptr<Food<int>>>  _foods;
+ 
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
@@ -31,7 +31,7 @@ class Game {
 
   int score{0};
 
-  void PlaceFood();
+  void PlaceFood(const int fID = 0);
   void Update();
 };
 

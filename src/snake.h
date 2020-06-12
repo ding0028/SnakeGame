@@ -4,12 +4,13 @@
 #include <vector>
 #include "SDL.h"
 
-typedef struct Food
+template <class myType>
+struct Food
 {
-    int x{ 0 };
-    int y{ 0 };
-    int type{ 0 };
-} Food;
+    myType x{ 0 };
+    myType y{ 0 };
+    myType type{ 0 };
+};
 
 
 class Snake {
