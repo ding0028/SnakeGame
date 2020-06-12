@@ -7,19 +7,22 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 Additional features:
 - A robot snake (obstacle) that grows in length and speed at reduced rate of player's snake 
 - It will compete with the player for food but not consuming the food, i.e. stay nearby the food
-- Special food (blue) to reduce the speed of robot snake, green food to reduce the length of robot snake by half 
+- Additional food (blue) to reduce the speed of robot snake, green food to reduce the length of robot snake by half 
+- Special food (violet) appears randomly that give additional score and reduce the length of player snake
 
 # Rubic:
-The project uses Object Oriented Programming techniques. 
-Classes use appropriate access specifiers for class members.
-Class constructors utilize member initialization lists.
-Classes abstract implementation details from their interfaces.
-Classes encapsulate behavior.
-Overloaded functions allow the same function to operate on different parameters.
-Derived class functions override virtual base class functions.
+- The project uses Object Oriented Programming techniques. 
+- Classes use appropriate access specifiers for class members. `snake.h, game.h organized into public, private accordingly `
+- Class constructors utilize member initialization lists. `snake.h:22`
+- Classes encapsulate behavior. `snake.h: usage of setter/getter `
+- Classes follow an appropriate inheritance hierarchy. `snake.h: child PlayerSnake class `
+- Overloaded functions allow the same function to operate on different parameters. `snake.h:60 `
+- Derived class functions override virtual base class functions. `snake.h:92 `
+- Templates generalize functions in the project. `snake.h:7 `
+- The project makes use of references in function declarations. `renderer.cpp:41 `
+- The project uses smart pointers instead of raw pointers `game.cpp:9-12 `
 
-The project makes use of references in function declarations.
-The project uses smart pointers instead of raw pointers
+
 
 
 ## Dependencies for Running Locally
